@@ -2,7 +2,7 @@ import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 
 // import example from './module-example'
-import pokemons from './pokemon'
+import {store as pokemons} from './pokemon'
 
 /*
  * If not building with SSR mode, you can
