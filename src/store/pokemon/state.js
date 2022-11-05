@@ -1,5 +1,4 @@
-export default function () {
-  return {
+export default {
     pokemons: [
       {
           id: 1,
@@ -24,5 +23,4 @@ export default function () {
       
   ],
     pokemonActivedRoute: "1"
-  }
 }

@@ -5,10 +5,10 @@
         </div>
         <div v-for="(pokemon, key) in pokemons" :key="key" class="col-4 q-pa-sm">
             <q-card>
-                <img :src="pokemon.img" alt="">
+                <img :src="`https://cdn.traction.one/pokedex/pokemon/${key+1}.png`" alt="">
                 
                 <q-card-section>
-                    {{pokemon.id}}. {{pokemon.name}}
+                    {{key+1}}. {{pokemon.name}}
                 </q-card-section>
             </q-card>
         </div>

@@ -2,7 +2,7 @@
 // so you can safely delete all default props below
 
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful',
-  btnEnter: 'Enter'
+  failed: 'Falha na ação',
+  success: 'Ação bem sucedida!',
+  btnEnter: 'Entrar'
 }

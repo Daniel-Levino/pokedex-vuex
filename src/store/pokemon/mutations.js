@@ -1,2 +1,6 @@
-export function someMutation (/* state */) {
+
+export default {
+    SET_POKEMONS(state, payload){
+        state.pokemons = payload
+    }
 }

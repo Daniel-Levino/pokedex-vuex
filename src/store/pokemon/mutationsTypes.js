@@ -1,0 +1,2 @@
+
+export const SET_POKEMONS = "POKEMON/SET_POKEMONS";
