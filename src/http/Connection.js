@@ -4,6 +4,10 @@ export const API = axios.create({
     baseURL: 'https://pokeapi.co/api/v2'
 })
 
+export const ApiWithoutBaseURL = axios.create({
+    baseURL: ''
+})
+
 axios.interceptors.request.use(function (config) {
     // Faz alguma coisa antes da requisição ser enviada
     return config;
