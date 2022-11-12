@@ -7,24 +7,27 @@ export const ActionGetPokemons = ({dispatch, commit}, payload) => {
     dispatch("ActionClearStatePokemons");
 
     return new Promise(async (resolve, reject)=>{
-        for (var i=1; i<=5; i++) {
+        for (var i=1; i<=6; i++) {
             rand = Math.floor(Math.random() * 150) + 1;
             await API.get(`/pokemon/${rand}`)
             .then(response => {
-                //console.log("ActionGetPokemons", response.data.name);
+                //console.log("ActionGetPokemons", response.data);
                 commit("ADDTOARRAY_POKEMON", response.data)
-                pokemons.push(response.data)
+                //pokemons.push(response.data)
             })
             .catch(error => {
                 reject(error)
             })
         }
         //console.log(pokemons);
-        Promise.all(pokemons)
     })
     
 }
 
 export const ActionClearStatePokemons = ({dispatch, commit}, payload) => {
     commit("SET_POKEMONS", [])
+}
+
+export const ActionSetStateShowGetThisPokemonModal = ({dispatch, commit}, payload) => {
+    commit("SET_STATESHOWGETTHISPOKEMONMODAL", payload)
 }

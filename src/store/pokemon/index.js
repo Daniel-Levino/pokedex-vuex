@@ -1,11 +1,11 @@
 import state from './state'
-// import * as getters from './getters'
+import getters from './getters'
 import mutations from './mutations'
 import * as actions from './actions'
 
-export const store = {
+export default {
   namespaced: true,
-  //getters,
+  getters,
   mutations,
   actions,
   state

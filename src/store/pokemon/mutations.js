@@ -4,5 +4,8 @@ export default {
     },
     ADDTOARRAY_POKEMON(state, payload){
         state.pokemons.push(payload)
+    },
+    SET_STATESHOWGETTHISPOKEMONMODAL(state, payload){
+        state.showGetThisPokemonModal = payload
     }
 }
