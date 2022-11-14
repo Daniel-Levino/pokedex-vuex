@@ -1,21 +1,28 @@
 <template>
-    <div>
-        <div class="row">
-            <div class="text-h1 text-yellow text-weight-bolder text-center col-12 q-mt-xl">
-                quasar pokedex
-            </div>
-            <div class="col-12 q-mt-xl" align="center">
-                <q-btn 
-                    label='entrar'
-                    align="center"
-                    size="xl"
-                    color="primary"
-                    @click="toPokemons()"
-                />
-            </div>
-        </div>
-
-    </div>
+    <q-card flat class="row justify-center flat" style="background-color: #121212">
+        <img style="padding: 10px; max-width: 800px;" src="../assets/img/pokemons.png" alt=""/>
+        <q-card-section class="text-h1 text-yellow text-weight-bolder text-center col-12 q-mb-xl">
+            quasar pokedex
+        </q-card-section>
+        <q-btn 
+            class="col-4 q-ma-md text-weight-bolder"
+            label='Novos Pokemons'
+            align="center"
+            size="xl"
+            color="white"
+            text-color="red"
+            @click="toPokemons()"
+        />
+        <q-btn 
+            class="col-4 q-ma-md text-weight-bolder"
+            label='Minha Pokedex'
+            align="center"
+            size="xl"
+            color="white"
+            text-color="red"
+            @click="toPokedex()"
+        />
+    </q-card>
 </template>
 
 <script>
@@ -29,6 +36,9 @@ export default {
     methods: {
         toPokemons() {
             this.$router.push('pokemons')
+        },
+        toPokedex(){
+            this.$router.push('mypokedex')
         }
     }
 }

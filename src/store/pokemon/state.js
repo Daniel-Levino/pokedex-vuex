@@ -20,6 +20,10 @@ export default function () {
             {type: 'dragon', color: "#8a55fd"}
         ],
         pokemonActivedRoute: "1",
-        showGetThisPokemonModal: false
+        showGetThisPokemonModal: {
+            pokemon: null,
+            show: false
+        },
+        tries: 0
     }
 }
