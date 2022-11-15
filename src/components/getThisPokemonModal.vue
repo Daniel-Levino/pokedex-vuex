@@ -42,7 +42,6 @@
                 color="white"
                 text-color="red"
                 v-close-popup
-                @click="hide()"
               />
               <q-btn
                 v-else-if="tries>0 && catched"
@@ -65,7 +64,8 @@ export default {
     name: 'GetThisPokemonModal',
     data() {
         return {
-          catched: false
+          catched: false,
+          item: null
         }
     },
     computed: {
@@ -78,26 +78,48 @@ export default {
     methods: {
         ...mapActions('pokemons', ["ActionSetStateShowGetThisPokemonModal", "ActionDecrementTries", "ActionRemovePokemonFromArray"]),
         hide(){
-          let item = this.showGetThisPokemonModal.pokemon.item
-          this.ActionRemovePokemonFromArray(item)
+          if(this.item == null) this.item = this.showGetThisPokemonModal.pokemon.item
+          this.ActionRemovePokemonFromArray(this.item)
           this.ActionSetStateShowGetThisPokemonModal({
             pokemon: null,
             show: false
           })
+          this.item = null
         },
         tryCatch() {
-          console.log("rolando d20 com dificuldade 15");
+          if(this.item == null) this.item = this.showGetThisPokemonModal.pokemon.item
           var rand = Math.floor(Math.random() * 20 + 1);
+          var rand2 = Math.floor(Math.random() * 3 + 14);
+          console.log(`rolando d20 com dificuldade ${rand2}`);
           console.log("resultado = ", rand);
-          this.catched = ( rand > 15) ? true : false;
+          this.catched = ( rand > rand2) ? true : false;
           if (!this.catched) this.ActionDecrementTries();
         },
         removeThisPokemon(){
-          this.ActionRemovePokemonFromArray(this.showGetThisPokemonModal.pokemon.item)
+          this.ActionRemovePokemonFromArray(this.item)
         },
         addToMyPokedex(){
+          let myPokemons = localStorage.getItem('myPokemons')
+          console.log("myPokemons = ", myPokemons);
+          if(!myPokemons){ myPokemons = []; }
+          else {myPokemons = JSON.parse(myPokemons)}
+          console.log("Mesmo pokemon",myPokemons.filter(el => el.id == this.showGetThisPokemonModal.pokemon.id).length>0);
+          if(myPokemons.filter(el => el.id == this.showGetThisPokemonModal.pokemon.id).length>0){
+            myPokemons.forEach(pkm => {
+              if(pkm.id == this.showGetThisPokemonModal.pokemon.id) pkm.amount++
+            });
+          }else{
+          myPokemons.push({
+              id: this.showGetThisPokemonModal.pokemon.id,
+              name: this.showGetThisPokemonModal.pokemon.name,
+              type: this.showGetThisPokemonModal.pokemon.types[0].type.name,
+              amount: 1
+            })
+          }
+          localStorage.setItem('myPokemons', JSON.stringify(myPokemons));
+          this.ActionRemovePokemonFromArray(this.item)
           this.catched = false;
-          this.removeThisPokemon()
+          //this.removeThisPokemon()
           console.log("CATCH");
           //this.hide();
         }

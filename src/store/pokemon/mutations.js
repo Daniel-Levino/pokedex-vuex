@@ -19,11 +19,8 @@ export default {
         // console.log("tries - 1 = ", state.tries);
     },
     REMOVEPOKEMONFROMARRAY(state, payload){
-        console.log("payload = ", payload);
         state.pokemons.forEach((el, index) => {
-            console.log("el = ",el.item);
             if(el.item == payload){
-                console.log("entrou");
                 state.pokemons.splice(index,1)
             }
         });
