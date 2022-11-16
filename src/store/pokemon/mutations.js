@@ -3,6 +3,9 @@ export default {
         state.pokemons = payload
     },
     ADDTOARRAY_POKEMON(state, payload){
+        if(state.myPokemons.filter(pkm => pkm.id == payload.id).length>0){
+            payload.catched = 1
+        }else { payload.catched = 0 }
         state.pokemons.push(payload)
     },
     SET_STATESHOWGETTHISPOKEMONMODAL(state, payload){
@@ -24,5 +27,8 @@ export default {
                 state.pokemons.splice(index,1)
             }
         });
+    },
+    SET_MYPOKEMONS(state, payload){
+        state.myPokemons = payload;
     }
 }

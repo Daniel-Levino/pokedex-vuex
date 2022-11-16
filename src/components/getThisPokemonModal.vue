@@ -73,7 +73,6 @@ export default {
         ...mapGetters('pokemons',["GetPokemonColor"])
     },
     beforeMount() {
-        // console.log(this.showGetThisPokemonModal);
     },
     methods: {
         ...mapActions('pokemons', ["ActionSetStateShowGetThisPokemonModal", "ActionDecrementTries", "ActionRemovePokemonFromArray"]),
@@ -89,7 +88,7 @@ export default {
         tryCatch() {
           if(this.item == null) this.item = this.showGetThisPokemonModal.pokemon.item
           var rand = Math.floor(Math.random() * 20 + 1);
-          var rand2 = Math.floor(Math.random() * 3 + 14);
+          var rand2 = Math.floor(Math.random() * 5 + 13);
           console.log(`rolando d20 com dificuldade ${rand2}`);
           console.log("resultado = ", rand);
           this.catched = ( rand > rand2) ? true : false;
@@ -100,10 +99,8 @@ export default {
         },
         addToMyPokedex(){
           let myPokemons = localStorage.getItem('myPokemons')
-          console.log("myPokemons = ", myPokemons);
           if(!myPokemons){ myPokemons = []; }
           else {myPokemons = JSON.parse(myPokemons)}
-          console.log("Mesmo pokemon",myPokemons.filter(el => el.id == this.showGetThisPokemonModal.pokemon.id).length>0);
           if(myPokemons.filter(el => el.id == this.showGetThisPokemonModal.pokemon.id).length>0){
             myPokemons.forEach(pkm => {
               if(pkm.id == this.showGetThisPokemonModal.pokemon.id) pkm.amount++
@@ -119,9 +116,6 @@ export default {
           localStorage.setItem('myPokemons', JSON.stringify(myPokemons));
           this.ActionRemovePokemonFromArray(this.item)
           this.catched = false;
-          //this.removeThisPokemon()
-          console.log("CATCH");
-          //this.hide();
         }
     }
 }

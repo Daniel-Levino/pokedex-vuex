@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex"
+
 export default {
     name: "homePage",
     data () {
@@ -34,12 +36,16 @@ export default {
         }
     },
     methods: {
+        ...mapActions("pokemons",["ActionGetMyPokemons"]),
         toPokemons() {
             this.$router.push('pokemons')
         },
         toPokedex(){
             this.$router.push('mypokedex')
         }
+    },
+    created() {
+        this.ActionGetMyPokemons()
     }
 }
 </script>

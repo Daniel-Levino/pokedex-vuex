@@ -10,12 +10,12 @@
                         <q-card-section class="text-right">
                             <div class="row justify-between">
                                 <q-rating
-                                v-model="like"
+                                    v-model="pokemon.catched"
                                     readonly
                                     max="1"
                                     size="3em"
                                     color="white"
-                                    color-selected="red-9"
+                                    color-selected="yellow"
                                     icon="star_border"
                                     icon-selected="star"
                                     no-dimming
@@ -53,32 +53,28 @@ import GetThisPokemonModal from "../components/getThisPokemonModal.vue"
 
 export default { 
     name: "PokemonsPage",
-    data () { return {
-        like: 0
-    }},
+    data () { return {}},
     components: {
         GetThisPokemonModal
     },
     computed: {
         ...mapState("pokemons", ["pokemons","pokemonsColorTypes"]),
         ...mapGetters("pokemons", ["GetPokemonColor"]),
+        catchedPokemon(){
+            return true
+        }
     },
     methods: {
-        ...mapActions("pokemons", ["ActionGetPokemons", "ActionClearStatePokemons", "ActionSetStateShowGetThisPokemonModal"]),
-        getPokemons() {
-            this.ActionGetPokemons()
-        },
+        ...mapActions("pokemons", ["ActionGetPokemons", "ActionClearStatePokemons", "ActionSetStateShowGetThisPokemonModal","ActionGetMyPokemons"]),
         getThisPokemon(pokemon) {
-            this.ActionSetStateShowGetThisPokemonModal({pokemon: Object.assign({},pokemon), show: true})
-            console.log(Object.assign({},pokemon).name)
+            this.ActionSetStateShowGetThisPokemonModal({pokemon: pokemon, show: true})
         }
     },
     created() {
+        this.ActionGetMyPokemons()
         this.ActionGetPokemons()
-        console.log("created")
     },
     beforeMount() {
-        console.log("beforeMount")
     },
     unmounted() {
         this.ActionClearStatePokemons()

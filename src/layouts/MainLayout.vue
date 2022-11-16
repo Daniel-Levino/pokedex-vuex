@@ -3,15 +3,19 @@
     <q-header>
       <q-toolbar class="bg-yellow justify-between">
         <q-btn round flat to="/">
-          <q-avatar>
-            <img src="../assets/img/pokebola.png">
-          </q-avatar>
+            <img style="max-width: 40px;" class="q-mt-sm" src="../assets/img/pokebola.png">
+          <div class="col-12 text-red text-weight-bolder">
+            home
+          </div>
         </q-btn>
         <div class="text-h5 text-uppercase text-weight-bolder text-red">Quasar Pokedex</div>
         <q-btn round flat to="/mypokedex">
-          <q-avatar>
-            <img src="../assets/img/pokedex.png">
-          </q-avatar>
+          
+            <img style="max-width: 60px;" class="q-mt-sm" src="../assets/img/pokedex.png">
+          
+          <div class="col-12 text-red text-weight-bolder">
+            pokedex
+          </div>
         </q-btn>
       </q-toolbar>
     </q-header>

@@ -1,8 +1,6 @@
 import { API } from "../../http/Connection";
 
 export const ActionGetPokemons = ({ dispatch, commit }, payload) => {
-  var url = "/pokemon?limit=20&offset=0";
-  var pokemons = [];
   var rand;
   dispatch("ActionClearStatePokemons");
 
@@ -11,16 +9,13 @@ export const ActionGetPokemons = ({ dispatch, commit }, payload) => {
       rand = Math.floor(Math.random() * 150) + 1;
       await API.get(`/pokemon/${rand}`)
         .then((response) => {
-          //console.log("ActionGetPokemons", response.data);
           response.data.item = i;
           commit("ADDTOARRAY_POKEMON", response.data);
-          //pokemons.push(response.data)
         })
         .catch((error) => {
           reject(error);
         });
     }
-    //console.log(pokemons);
   });
 };
 
@@ -46,4 +41,13 @@ export const ActionRemovePokemonFromArray = ({ dispatch, commit }, payload) => {
     pokemon: null,
     show: false,
   });
+};
+
+export const ActionGetMyPokemons = ({dispatch, commit}, payload) => {
+  let myPokemons = localStorage.getItem('myPokemons')
+  if(myPokemons){
+    myPokemons = JSON.parse(myPokemons)
+    myPokemons = myPokemons.sort((a,b)=> a.id - b.id)
+    commit("SET_MYPOKEMONS", myPokemons)
+  }
 };

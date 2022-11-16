@@ -24,6 +24,7 @@ export default function () {
             pokemon: null,
             show: false
         },
-        tries: 0
+        tries: 0,
+        myPokemons: []
     }
 }

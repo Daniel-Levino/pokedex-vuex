@@ -6,19 +6,9 @@
         <div v-if="myPokemons.length>0" class="col-12">
             <div class="row">
                 <div v-for="(pokemon, key) in myPokemons" :key="key" class="col-lg-2 col-md-4 col-sm-6 col-xs-12 q-pa-md">
-                    <q-card class="pokemon-card pointer" :style="GetPokemonColor(pokemon.type)">
+                    <q-card :style="GetPokemonColor(pokemon.type)">
                         <q-card-section class="text-right">
-                            <div class="row justify-between">
-                                <q-rating
-                                    readonly
-                                    max="1"
-                                    size="3em"
-                                    color="white"
-                                    color-selected="red-9"
-                                    icon="star_border"
-                                    icon-selected="star"
-                                    no-dimming
-                                />
+                            <div class="row justify-end">
                                 {{ pokemon.index}}
                                 <q-btn color="white" text-color="black" :label="pokemon.id" round unelevated/>
                             </div>
@@ -54,20 +44,21 @@ import { mapActions, mapState, mapGetters } from "vuex";
 export default { 
     name: "PokemonsPage",
     data () { return {
-        myPokemons: []
+        //myPokemons: []
     }},
     computed: {
+        ...mapState("pokemons", ["myPokemons"]),
         ...mapGetters("pokemons", ["GetPokemonColor"]),
     },
     methods: {
+        ...mapActions("pokemons", ["ActionGetMyPokemons"]),
     },
     created() {
     },
+    beforeCreate() {
+    },
     beforeMount() {
-        this.myPokemons = JSON.parse(localStorage.getItem('myPokemons'))
-        //console.log();
-        this.myPokemons = this.myPokemons.sort((a,b)=> a.id - b.id)
-        console.log(this.myPokemons);
+        this.ActionGetMyPokemons()
     },
     unmounted() {
     },
